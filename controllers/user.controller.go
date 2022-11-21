@@ -60,9 +60,9 @@ func (user *userController) UpdateUser(c *gin.Context) {
 }
 
 func (user *userController) GetAllUsers(c *gin.Context) {
-	var Users []entities.User = user.userService.GetAllUsers()
+	var Userr []entities.Users = user.userService.GetAllUsers()
 
-	c.JSON(http.StatusOK, Users)
+	c.JSON(http.StatusOK, Userr)
 
 }
 
@@ -75,8 +75,8 @@ func (user *userController) GetUserById(c *gin.Context) {
 			"Message": "Data not found",
 		})
 	}
-	var userWithId entities.User = user.userService.GetUserById(id)
-	if (userWithId == entities.User{}) {
+	var userWithId entities.Users = user.userService.GetUserById(id)
+	if (userWithId == entities.Users{}) {
 
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": "no Data found",
@@ -93,7 +93,7 @@ func (user *userController) DeleteUser(c *gin.Context) {
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err)
 	}
-	var userId entities.User
+	var userId entities.Users
 	userId.Id = id
 	res := user.userService.DeleteUser(userId, id)
 	c.JSON(http.StatusBadRequest, res)

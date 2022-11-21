@@ -10,11 +10,11 @@ import (
 )
 
 type UserService interface {
-	CreateUser(user dto.CreateUserDto) entities.User
-	UpdateUser(user dto.UpdateUserDto, userId uint64) entities.User
-	GetAllUsers() []entities.User
-	GetUserById(userId uint64) entities.User
-	DeleteUser(user entities.User, userId uint64) entities.User
+	CreateUser(user dto.CreateUserDto) entities.Users
+	UpdateUser(user dto.UpdateUserDto, userId uint64) entities.Users
+	GetAllUsers() []entities.Users
+	GetUserById(userId uint64) entities.Users
+	DeleteUser(user entities.Users, userId uint64) entities.Users
 }
 
 type userService struct {
@@ -27,8 +27,8 @@ func NewUserServices(userRep repository.UserRepository) UserService {
 	}
 }
 
-func (service *userService) CreateUser(user dto.CreateUserDto) entities.User {
-	newuser := entities.User{}
+func (service *userService) CreateUser(user dto.CreateUserDto) entities.Users {
+	newuser := entities.Users{}
 	err := smapping.FillStruct(&newuser, smapping.MapFields(&user))
 
 	if err != nil {
@@ -39,8 +39,8 @@ func (service *userService) CreateUser(user dto.CreateUserDto) entities.User {
 	return res
 }
 
-func (service *userService) UpdateUser(user dto.UpdateUserDto, userId uint64) entities.User {
-	updateuser := entities.User{}
+func (service *userService) UpdateUser(user dto.UpdateUserDto, userId uint64) entities.Users {
+	updateuser := entities.Users{}
 	err := smapping.FillStruct(&updateuser, smapping.MapFields(&user))
 
 	if err != nil {
@@ -52,19 +52,19 @@ func (service *userService) UpdateUser(user dto.UpdateUserDto, userId uint64) en
 
 }
 
-func (service *userService) GetAllUsers() []entities.User {
+func (service *userService) GetAllUsers() []entities.Users {
 	return service.userRepository.GetAllUsers()
 
 }
 
-func (service *userService) GetUserById(userId uint64) entities.User {
+func (service *userService) GetUserById(userId uint64) entities.Users {
 
 	return service.userRepository.GetUserById(userId)
 
 }
 
-func (service *userService) DeleteUser(user entities.User, userId uint64) entities.User {
-	userToDelete := entities.User{}
+func (service *userService) DeleteUser(user entities.Users, userId uint64) entities.Users {
+	userToDelete := entities.Users{}
 	err := smapping.FillStruct(&userToDelete, smapping.MapFields(&user))
 
 	if err != nil {

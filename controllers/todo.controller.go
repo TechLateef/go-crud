@@ -36,7 +36,10 @@ func (todo *todoController) CreateToDo(c *gin.Context) {
 	}
 
 	res := todo.todoService.CreateToDo(todoC)
+
 	c.JSON(http.StatusOK, res)
+
+	return
 
 }
 

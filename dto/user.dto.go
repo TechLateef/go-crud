@@ -1,10 +1,11 @@
 package dto
 
 type CreateUserDto struct {
-	Id    uint64 `uri:"id" form:"id" binding:"required,uuid"`
-	Name  string `uri:"name" form:"name" binding:"required"`
-	Email string `uri:"email" form:"email" binding:"required"`
-	Phone string `uri:"->;<-;not null" form:"phone" binding:"required"`
+	Id    uint64           `uri:"id" form:"id" binding:"required,uuid"`
+	Name  string           `uri:"name" form:"name" binding:"required"`
+	Email string           `uri:"email" form:"email" binding:"required"`
+	Phone string           `uri:"->;<-;not null" form:"phone" binding:"required"`
+	Todos *[]CreateToDoDto `json:"books,omitempty"`
 }
 
 type UpdateUserDto struct {

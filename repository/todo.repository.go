@@ -26,14 +26,14 @@ func NewToDoRepository(todoRepo *gorm.DB) ToDoRepository {
 
 func (db *todoRepository) CreateToDo(t entities.ToDoModels) entities.ToDoModels {
 	db.connection.Save(&t)
-	db.connection.Preload("ToDoModels").Find(&t)
-	db.connection.Preload("User.ToDoModels").First(&t)
+	db.connection.Preload("Users").Find(&t)
+	// db.connection.Preload("User").First(&t)
 	return t
 }
 
 func (db *todoRepository) UpdateTodo(t entities.ToDoModels, todoId uint64) entities.ToDoModels {
 	db.connection.Save(&t)
-	db.connection.Preload("ToDoModels").First(&t)
+	db.connection.Preload("User").First(&t)
 
 	return t
 }
@@ -45,12 +45,12 @@ func (db *todoRepository) DeleteTodo(todoId uint64) entities.ToDoModels {
 
 func (db *todoRepository) GetALL() []entities.ToDoModels {
 	var Todos []entities.ToDoModels
-	db.connection.Preload("ToDoModels").Find(&Todos)
+	db.connection.Preload("Users").Find(&Todos)
 	return Todos
 }
 
 func (db *todoRepository) FindTodoById(todoId uint64) entities.ToDoModels {
 	var todoWId entities.ToDoModels
-	db.connection.Preload("ToDoModels").Find(&todoWId, todoId)
+	db.connection.Preload("Users").Find(&todoWId, todoId)
 	return todoWId
 }

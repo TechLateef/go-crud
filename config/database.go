@@ -41,7 +41,7 @@ func SetupDatabaseConnection() *gorm.DB {
 		panic("Failed to load env file")
 
 	}
-	db.AutoMigrate(&entities.ToDoModels{}, &entities.User{})
+	db.AutoMigrate(&entities.ToDoModels{}, &entities.Users{})
 	return db
 
 }
